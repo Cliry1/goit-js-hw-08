@@ -80,7 +80,7 @@ ul.addEventListener("click", event=> {
   event.preventDefault();
 }
 
-const instance = basicLightbox.create(`<img src="${event.target.dataset.source}"class="open-img">`);
+const instance = basicLightbox.create(`<img src="${event.target.dataset.source}"class="open-img" style=" width:1112px; height:640px;">`);
 instance.show();
 document.addEventListener("keyup", event=> {
   if(event.key==="Escape")
