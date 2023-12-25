@@ -20,3 +20,7 @@
   cursor: zoom-in;
   scale: 1.01;
 }
+.open-img {
+  min-width: 1112px;
+  min-height: 640px;
+}

@@ -76,15 +76,26 @@ ul.addEventListener("click", event=> {
   if(event.target.nodeName !=="IMG"){
   return;
 }
-  if (event.target.nodeName === "IMG"){
+else{
   event.preventDefault();
 }
 
-const instance = basicLightbox.create(`<img src="${event.target.dataset.source}"class="open-img" style=" width:1112px; height:640px;">`);
+function closeListener (event){
+  if (event.key === "Escape") {
+    instance.close();
+  }
+}
+
+const instance = basicLightbox.create(`<img src="${event.target.dataset.source}"class="open-img">`, {
+  onShow: () => {
+    document.addEventListener("keyup",  closeListener);
+  },
+  onClose: () => {
+    document.removeEventListener("keyup",  closeListener);
+  }
+});
 instance.show();
-document.addEventListener("keyup", event=> {
-  if(event.key==="Escape")
-  {instance.close()}
-})
+
+
 
 });
