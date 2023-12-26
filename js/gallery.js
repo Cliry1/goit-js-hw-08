@@ -66,6 +66,20 @@ const images = [
 
 
 
+function closeListener (event){
+  if (event.key === "Escape") {
+    instance.close();
+  }
+}
+const instance = basicLightbox.create(`<img class="open-img">`, {
+  onShow: () => {
+    document.addEventListener("keyup",  closeListener);
+  },
+  onClose: () => {
+    document.removeEventListener("keyup",  closeListener);
+  }
+});
+
 
 const ul = document.querySelector(".gallery");
 const list = images.map(elem =>`<li class="gallery-item"><a class="gallery-link" href="${elem.original}"><img class="gallery-image" data-source="${elem.original}" src="${elem.preview}" alt="${elem.description}"></a></li>`).join("");
@@ -79,23 +93,8 @@ ul.addEventListener("click", event=> {
 else{
   event.preventDefault();
 }
-
-function closeListener (event){
-  if (event.key === "Escape") {
-    instance.close();
-  }
-}
-
-const instance = basicLightbox.create(`<img src="${event.target.dataset.source}"class="open-img">`, {
-  onShow: () => {
-    document.addEventListener("keyup",  closeListener);
-  },
-  onClose: () => {
-    document.removeEventListener("keyup",  closeListener);
-  }
-});
+const largeImg = instance.element().querySelector(".open-img");
+largeImg.src = event.target.dataset.source;
+largeImg.alt = event.target.alt;
 instance.show();
-
-
-
 });
